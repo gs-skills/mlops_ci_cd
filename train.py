@@ -17,14 +17,14 @@ df = pd.read_csv("./data/wine_quality.csv")
 
 # Split into train and test sections
 y = df.pop("quality")
-X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.3, random_state=seed)
+X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.2, random_state=seed)
 
 #################################
 ########## MODELLING ############
 #################################
 
 # Fit a model on the train section
-regr = RandomForestRegressor(max_depth=15, random_state=seed)
+regr = RandomForestRegressor(n_estimators=150, max_depth=15, random_state=seed)
 regr.fit(X_train, y_train)
 
 # Report training set score
