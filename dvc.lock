@@ -1,0 +1,21 @@
+schema: '2.0'
+stages:
+  train_model:
+    cmd: python train.py
+    deps:
+    - path: ./data/wine_quality.csv
+      md5: 6a883fd98624e18c0b7ce251f4fab4fb
+      size: 100951
+    - path: train.py
+      md5: 19569b3645768b7848069890174fc005
+      size: 2882
+    outs:
+    - path: feature_importance.png
+      md5: b35a9c15cf15ce3539ba4aa8baad39b2
+      size: 45754
+    - path: metrics.json
+      md5: 3ed4f3fe02a428e08d58524e0234eb4e
+      size: 76
+    - path: residuals.png
+      md5: cb5dbc13fc76b2c71e4382cc591bb702
+      size: 49163
