@@ -6,9 +6,10 @@ jobs:
     container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
       - uses: actions/checkout@v2
-      - name: Train model and push to server
+      - name: Train model
         env:
-          REPO_TOKEN: ${{ secrets.TOKEN_REPO }}
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push to server
       - uses: appleboy/ssh-action@master
         with:
             host: ${{ secrets.SERVER_IP }}
