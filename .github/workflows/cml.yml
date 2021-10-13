@@ -3,20 +3,18 @@ on: [push]
 jobs:
   run:
     runs-on: ubuntu-latest
-    # optionally use a convenient Ubuntu LTS + DVC + CML image
     container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
       - uses: actions/checkout@v2
-      # may need to setup NodeJS & Python3 on e.g. self-hosted
-      # - uses: actions/setup-node@v2
-      #   with:
-      #     node-version: '12'
-      # - uses: actions/setup-python@v2
-      #   with:
-      #     python-version: '3.x'
-      - name: Train model
+      - name: Train model and push to server
         env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_TOKEN: ${{ secrets.TOKEN_REPO }}
+      - uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.SERVER_IP }}
+            username: ${{ secrets.SERVER_USERNAME }}
+            password: ${{ secrets.SERVER_PASSWORD }}
+            script: cd ${{ secrets.REPO_PATH }} && git pull
         run: |
           # Your ML workflow goes here
           sudo pip install --upgrade pip

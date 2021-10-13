@@ -26,5 +26,5 @@ def dataPipiline(dataset):
 (   
     dataPipiline(stackoverflowData)
     .sample(frac=0.50, replace=False, random_state=45)
-    .to_csv('./data/process/stackoverflowSample.csv', index=False)
+    .to_csv('../data/process/stackoverflowSample.csv', index=False)
 )
