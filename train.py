@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestRegressor
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import json
 # Set random seed
 seed = 42
 
@@ -12,7 +13,7 @@ seed = 42
 ################################
 
 # Load in the data
-df = pd.read_csv("wine_quality.csv")
+df = pd.read_csv("./data/wine_quality.csv")
 
 # Split into train and test sections
 y = df.pop("quality")
@@ -35,6 +36,9 @@ test_score = regr.score(X_test, y_test) * 100
 with open("metrics.txt", 'w') as outfile:
         outfile.write("Training variance explained: %2.1f%%\n" % train_score)
         outfile.write("Test variance explained: %2.1f%%\n" % test_score)
+# Now print to file
+with open("metrics.json", 'w') as outfile:
+        json.dump({ "Training variance": train_score, "Test variance": test_score}, outfile)
 
 
 ##########################################

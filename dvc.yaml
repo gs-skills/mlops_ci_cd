@@ -1,0 +1,12 @@
+stages:
+    train_model:
+      cmd: python train.py
+      deps:
+      - train.py
+      - ./data/wine_quality.csv
+      outs:
+      - feature_importance.png
+      - residuals.png
+      metrics:
+      - metrics.json:
+          cache: false
